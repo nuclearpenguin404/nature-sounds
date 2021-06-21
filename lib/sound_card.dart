@@ -21,15 +21,23 @@ class SoundCard extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 32.0),
+            style: TextStyle(fontSize: 24.0),
             textAlign: TextAlign.center,
           ),
-          /*SizedBox(
-            height: 16.0,
-          ),*/
-          Icon(
-            cardIcon,
-            size: 80.0,
+          Row(
+            children: [
+              Icon(
+                cardIcon,
+                size: 80.0,
+              ),
+              Slider(
+                value: 0.5,
+              ),
+              Icon(
+                Icons.play_arrow_rounded,
+                size: 60.0,
+              ),
+            ],
           ),
         ],
       ),

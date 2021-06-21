@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:fluttericon/meteocons_icons.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'sound_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,39 +17,13 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: SoundCard('Rain', WeatherIcons.wi_showers),
-                ),
-                Expanded(
-                  child:
-                      SoundCard('Thunderstorm', WeatherIcons.wi_storm_showers),
-                ),
-              ],
-            ),
-            /*Row(
-              children: [
-                Expanded(
-                  child: SoundCard('Snow', WeatherIcons.wi_snow),
-                ),
-                Expanded(
-                  child: SoundCard('Wind', WeatherIcons.wi_cloudy_windy),
-                ),
-              ],
-            ),*/
-            Row(
-              children: [
-                Expanded(
-                  child: SoundCard('Thunderstorm', Icons.favorite),
-                ),
-                Expanded(
-                  child: SoundCard('Wind', Icons.beach_access),
-                ),
-              ],
-            )
+            SoundCard('Rain', Meteocons.rain),
+            SoundCard('Thunderstorm', Meteocons.clouds_flash),
+            SoundCard('Snow', Meteocons.snow_heavy),
+            SoundCard('Wind', Meteocons.wind),
+            SoundCard('Wind', Icons.access_alarm),
           ],
         ),
       ),
