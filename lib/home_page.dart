@@ -23,10 +23,16 @@ class _HomePageState extends State<HomePage> {
             SoundCard('Thunderstorm', Meteocons.clouds_flash),
             SoundCard('Snow', Meteocons.snow_heavy),
             SoundCard('Wind', Meteocons.wind),
-            SoundCard('Wind', Icons.access_alarm),
+            SoundCard('Waves', Entypo.air),
           ],
         ),
       ),
+      /*floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.play_arrow),
+        onPressed: () {
+          print('hi');
+        },
+      ),*/
     );
   }
 }
