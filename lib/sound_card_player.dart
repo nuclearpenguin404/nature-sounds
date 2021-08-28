@@ -14,56 +14,19 @@ class _SoundCardPlayerState extends State<SoundCardPlayer> {
   IconData activeIcon = Icons.play_arrow_rounded;
   bool isPlayed = false;
 
-  static AudioCache player = AudioCache();
-  final cache = AudioCache();
-  Future currentPlayer;
+  // taken here
+  // https://stackoverflow.com/questions/56360083/stop-audio-loop-audioplayers-package
 
-  // void toggleSound(String label) {
-  //   String fileName = fileNameCheck(label);
-  //
-  //   player.loop(fileName);
-  //   isPlayed = true;
-  //
-  //   setState(() {
-  //     activeIcon = Icons.pause;
-  //   });
-  // }
+  AudioCache cache = AudioCache();
+  AudioPlayer player = AudioPlayer();
 
-  // void toggleSound(String label) async {
-  //   String fileName = fileNameCheck(label);
-  //
-  //   //if (player == null || isPlayed == false) {
-  //   if (isPlayed == false) {
-  //     currentPlayer = player.loop(fileName);
-  //     setState(() {
-  //       activeIcon = Icons.pause;
-  //     });
-  //     isPlayed = true;
-  //   } else {
-  //     //player.stop();
-  //     //player.clear(fileName);
-  //
-  //     isPlayed = false;
-  //     setState(() {
-  //       activeIcon = Icons.play_arrow;
-  //     });
-  //   }
-  // }
+  void loopFile(filename) async {
+    player = await cache.loop(filename, volume: 0.5);
+  }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Container(
-  //     child: IconButton(
-  //       icon: Icon(
-  //         activeIcon,
-  //         size: 60.0,
-  //       ),
-  //       onPressed: () {
-  //         //toggleSound(widget.label);
-  //         toggleSound(widget.label);
-  //       },
-  //     ),
-  //   );
+  void stopFile() {
+    player?.stop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,18 +34,33 @@ class _SoundCardPlayerState extends State<SoundCardPlayer> {
       children: [
         Slider(
           value: 0.5,
+          min: 0,
+          max: 1,
+          onChanged: (double value) {
+            setState(() {
+              player.setVolume(value);
+            });
+          },
         ),
         IconButton(
           icon: Icon(
             activeIcon,
             size: 60.0,
           ),
-          onPressed: () => {
-            setState: () {
-              AudioPlayer currentTrack = player.loop(widget.fileName);
-              isPlayed = true;
-              activeIcon = Icons.pause;
-            }
+          onPressed: () {
+            setState(() {
+              if (isPlayed == false) {
+                activeIcon = Icons.pause;
+                //Future player = cache.loop(widget.fileName, volume: 1.0);
+                loopFile(widget.fileName);
+                //print(player);
+                isPlayed = true;
+              } else {
+                stopFile();
+                activeIcon = Icons.play_arrow_rounded;
+                isPlayed = false;
+              }
+            });
           },
         ),
       ],
